@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './styles/font.css';
+import { globalStyles } from './styles/global_styles';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { injectGlobal } from '@emotion/css';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './store/index'
+import { Provider } from 'react-redux'
 
+injectGlobal(globalStyles)
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
