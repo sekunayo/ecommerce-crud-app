@@ -6,13 +6,20 @@ const productCard = css({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    gap: "16px"
+    gap: "16px",
 })
 
 const productCardImage = css({
     width: "300px",
     height: "300px",
     position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    "& img": {
+        height: "100%"
+    }
 })
 
 const productCardHeading = css({

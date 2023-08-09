@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { motion } from "framer-motion";
 import { styles } from './styles'
+
 import { Button } from '../../components/Button'
 import Slides from '../../components/Slides'
-import { slides } from '../../mock'
-import { motion } from "framer-motion";
 import Header from '../../components/Header'
-
+import { slides } from '../../mock'
 
 const Home = () => {
     // const [x, setX] = useState(0);

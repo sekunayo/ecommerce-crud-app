@@ -1,10 +1,15 @@
 import React from 'react'
+import { styles } from './styles';
+import { useSelector } from 'react-redux';
+
 import Header from '../../components/Header'
 import ProductCard from '../../components/ProductCard';
-import { styles } from './styles';
 import { data } from "../../mock/data"
+import { RootState } from '../../store';
 
 const Shop = () => {
+    const cartValue = useSelector((state: RootState) => state.cart.value);
+
     return (
         <div className={styles.shop}>
             <Header />
@@ -15,7 +20,7 @@ const Shop = () => {
                     {
                         data.map((element, index) => {
                             return (
-                                <ProductCard id={element?.id} price={element.price} name={element.name} image={element.image} key={index + 1} />
+                                <ProductCard element={element} key={index + 1} />
                             )
                         })
                     }

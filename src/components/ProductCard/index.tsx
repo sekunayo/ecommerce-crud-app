@@ -1,36 +1,42 @@
 import React, { useState } from 'react';
-import { Button } from '../Button';
-import { styles } from "./styles"
-import brownImage from "../../assets/images/brown_wristwatch.avif";
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { styles } from "./styles"
+
+import { Button } from '../Button';
+
+import { addToCart, calculateTotal } from '../../slices/cartSlice';
 
 interface ProductCardProps {
-    image: string;
-    name: string;
-    price: number;
-    id?: string;
+    element: any;
 }
-const ProductCard = ({ image, name, price, id }: ProductCardProps) => {
+const ProductCard = ({ element }: ProductCardProps) => {
     const [quickView, setQuickView] = useState(false);
+    const dispatch = useDispatch();
 
     const toggleView = () => {
         setQuickView(!quickView)
     }
 
+    const handleAddToCart = () => {
+        dispatch(addToCart(element))
+        dispatch(calculateTotal())
+    }
+
     return (
         <div className={styles.productCard}>
-            <Link to={`/${id}`}>
+            <Link to={`/${element?.id}`}>
                 <div onMouseEnter={toggleView} onMouseLeave={toggleView} className={styles.productCardImage}>
-                    <img src={image} alt="wristwatch" />
+                    <img src={element?.image as string} alt="wristwatch" />
 
                     <div data-show={Boolean(quickView)} className={styles.productCardHoverButton}>
                         <Button variant='primary' type="button" label="QUICK VIEW" />
                     </div>
                 </div>
             </Link>
-            <h6 className={styles.productCardHeading}>{name}</h6>
-            <p className={styles.productCardPrice}>${price}</p>
-            <Button variant='primary' type="button" label='ADD TO CART' />
+            <h6 className={styles.productCardHeading}>{element?.name}</h6>
+            <p className={styles.productCardPrice}>${element?.price}</p>
+            <Button handleClick={handleAddToCart} variant='primary' type="button" label='ADD TO CART' />
         </div>
     )
 }

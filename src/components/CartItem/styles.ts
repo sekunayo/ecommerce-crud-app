@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 
 const cartItem = css({
     display: "grid",
-    gridTemplateColumns: "50px 1fr 100px 100px 100px",
+    gridTemplateColumns: "1fr 100px 100px 100px",
     alignItems: "center",
     gap: "20px",
     padding: "30px"
@@ -11,7 +11,6 @@ const cartItem = css({
 const cartItemImage = css({
     height: "100px",
     width: "100px",
-    backgroundColor: "red"
 })
 
 const cartItemProduct = css({
@@ -20,8 +19,20 @@ const cartItemProduct = css({
     gap: "20px"
 })
 
+const cartItemButton = css({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    "& svg": {
+        width: "30px",
+        height: "30px"
+    }
+})
+
 export const styles = {
     cartItem,
     cartItemImage,
-    cartItemProduct
+    cartItemProduct,
+    cartItemButton
 }

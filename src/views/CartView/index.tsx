@@ -1,13 +1,35 @@
 import React from 'react'
-import CartItem from '../../components/CartItem'
-import CartViewTotal from '../CartViewTotal'
+import { useSelector } from 'react-redux'
 import { styles } from './styles'
 
+import CartViewTotal from '../CartViewTotal'
+
+import { Button } from '../../components/Button'
+import CartItem from '../../components/CartItem'
+import { RootState } from '../../store'
+
 const CartView = () => {
+    const cartValue = useSelector((state: RootState) => state.cart.value)
+
     return (
-        <div>
+        <div className={styles.cartViewItem}>
             <div className={styles.cartViewItemList}>
-                <CartItem />
+                <div className={styles.cartViewHeader}>
+                    <h4>product</h4>
+                    <h4>Price</h4>
+                    <h4>quantity</h4>
+                    <h4>subtotal</h4>
+                </div>
+                {
+                    cartValue?.map?.((element, index) => {
+                        return (
+                            <CartItem key={index + 1} element={element} />
+                        )
+                    })
+                }
+            </div>
+            <div className={styles.cartViewButton}>
+                <Button disabled={true} type='button' variant='primary' label="update cart" />
             </div>
             <div className={styles.cartView}>
 

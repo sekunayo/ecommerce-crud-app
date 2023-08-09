@@ -31,7 +31,7 @@ const shopList = css({
 const shopListContainer = css({
     display: "flex",
     justifyContent: "center",
-    width: "100%"
+    width: "100%",
 })
 
 export const styles = {

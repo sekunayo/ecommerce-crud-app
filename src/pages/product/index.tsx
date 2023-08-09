@@ -1,22 +1,32 @@
-import Header from '../../components/Header'
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { styles } from './styles'
+
+import Header from '../../components/Header'
 import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 import { Button } from '../../components/Button'
 import Badge from '../../components/Badge';
 import { data } from "../../mock/data"
 import ProductCard from '../../components/ProductCard';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { addToCart } from '../../slices/cartSlice';
+
+
 const Product = () => {
     const [currentElement, setCurrentElement] = useState<any>({});
 
-    const { id } = useParams()
+    const { id } = useParams();
+    const dispatch = useDispatch();
 
     const currentProduct = data?.find((element) => element?.id === id)
 
     useEffect(() => {
         setCurrentElement(currentProduct)
     }, [currentProduct])
+
+    const handleAddToCart = () => {
+        dispatch(addToCart(currentElement))
+    }
 
     return (
         <div className={styles.product}>
@@ -36,7 +46,7 @@ const Product = () => {
                         <div className={styles.productDescriptionText}>
                             <p className={styles.productDescriptionTextCaption}>{currentElement?.name} <span></span> {currentElement?.size}mm</p>
                             <div className={styles.productDescriptionTextPrice}>
-                                <h4 className={styles.productDescriptionTextHeading}>{currentElement?.name} {currentElement?.category}</h4>
+                                <h4 className={styles.productDescriptionTextHeading}>{currentElement?.category} {currentElement?.name}</h4>
                                 <p className={styles.productDescriptionTextPriceContent}>${currentElement?.price}</p>
                             </div>
                             <p className={styles.productDescriptionTextContent}>
@@ -57,7 +67,7 @@ const Product = () => {
                                 </div>
                             </div>
                             <div className={styles.productDescriptionButton}>
-                                <Button type="button" variant='primary' label="Add to cart" icon={<Plus />} />
+                                <Button handleClick={handleAddToCart} type="button" variant='primary' label="Add to cart" icon={<Plus />} />
                             </div>
                         </div>
                     </div>

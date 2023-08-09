@@ -8,12 +8,17 @@ const button = css({
     padding: "0px 20px",
     display: "flex",
     alignItems: "center",
+    textTransform: "uppercase",
 
     "& svg": {
         fill: "#fff",
         width: "12px",
         height: "100%",
         marginLeft: "10px"
+    },
+
+    "&:disabled": {
+        cursor: "not-allowed"
     }
 
 })

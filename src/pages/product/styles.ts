@@ -4,7 +4,7 @@ const product = css({
     paddingTop: "40px",
     minHeight: "100vh",
     overflowY: "auto",
-    width: "100%"
+    width: "100%",
 })
 
 const productMain = css({
