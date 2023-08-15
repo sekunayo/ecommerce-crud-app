@@ -34,13 +34,13 @@ const Header = () => {
             <nav className={styles.headerNavigation}>
                 <ul className={styles.headerNavigationList}>
                     <li>
-                        <Link className={styles.headerNavigationListItem} to="/">Home </Link>
+                        <Link className={styles.headerNavigationListItem} to="/">Home</Link>
                     </li>
                     <li>
-                        <Link className={styles.headerNavigationListItem} to="/shop">Shop </Link>
+                        <Link className={styles.headerNavigationListItem} to="/shop">Shop</Link>
                     </li>
                     <li className={styles.headerNavigationListItem}>
-                        Contact
+                        <Link className={styles.headerNavigationListItem} to="/contact">Contact</Link>
                     </li>
                 </ul>
             </nav>

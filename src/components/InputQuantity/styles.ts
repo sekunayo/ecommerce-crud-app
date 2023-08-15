@@ -2,10 +2,16 @@ import { css } from "@emotion/css";
 
 const inputQuantity = css({
     width: "84px",
-    border: " 2px solid rgb(33, 33, 33)",
+    border: " 1px solid rgb(33, 33, 33)",
     height: "45px",
     display: "grid",
-    gridTemplateColumns: "repeat(3, 28px)"
+    gridTemplateColumns: "auto 28px auto",
+    alignItems: "center",
+
+    "& button": {
+        fontSize: "14px",
+        fontStyle: "normal"
+    }
 })
 
 const inputQuantityBox = css({
@@ -16,7 +22,10 @@ const inputQuantityBox = css({
     display: "flex",
     justifyContent: "center",
     height: "100%",
-    alignItems: "center"
+    alignItems: "center",
+    padding: "0px",
+    fontSize: "14px",
+    fontStyle: "normal"
 })
 
 export const styles = {

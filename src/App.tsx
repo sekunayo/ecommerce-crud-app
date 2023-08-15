@@ -7,15 +7,20 @@ import Product from './pages/product';
 import { Routes, Route } from 'react-router-dom';
 import Shop from './pages/shop';
 import Cart from './pages/cart';
+import Checkout from './pages/checkout';
+import Contact from './pages/contact';
 
 function App() {
   return (
     <div className={styles.app}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:id" element={<Product />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route index element={<Home />} />
+        <Route path=":id" element={<Product />} />
+        <Route path="shop" element={<Shop />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<p>Not Found</p>} />
       </Routes>
     </div>
   );

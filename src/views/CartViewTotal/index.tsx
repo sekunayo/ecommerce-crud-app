@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { styles } from './styles'
 
 import { Button } from '../../components/Button'
 import { RootState } from '../../store'
+import { useNavigate } from 'react-router-dom'
 
 const CartViewTotal = () => {
     const cartTotalValue = useSelector((state: RootState) => state.cart.total);
+    const navigate = useNavigate();
 
+    const handleCheckout = () => {
+        navigate("/checkout")
+    }
     return (
         <div className={styles.cartViewTotal}>
             <h4 className={styles.cartViewTotalHeading}>Cart Total</h4>
@@ -15,7 +20,7 @@ const CartViewTotal = () => {
             <hr />
             <p className={styles.cartViewTotalParagraph}>Total <span>${cartTotalValue}</span></p>
             <div className={styles.cartViewTotalButton}>
-                <Button variant='primary' type="button" label="PROCEED TO CHECKOUT" />
+                <Button handleClick={handleCheckout} variant='primary' type="button" label="PROCEED TO CHECKOUT" />
             </div>
         </div>
     )

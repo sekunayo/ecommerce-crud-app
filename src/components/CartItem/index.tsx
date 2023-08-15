@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { styles } from './styles'
 
 import InputQuantity from '../InputQuantity';
 
 import { ReactComponent as Close } from '../../assets/icons/close.svg';
-import { calculateTotal, removeFromCart } from '../../slices/cartSlice';
+import { calculateTotal, decreaseQuantity, increaseQuantity, removeFromCart } from '../../slices/cartSlice';
 
 
 interface CartItemProps {
@@ -17,8 +17,19 @@ const CartItem = ({ element }: CartItemProps) => {
 
     const handleRemoveCart = () => {
         dispatch(removeFromCart(element));
-        dispatch(calculateTotal())
     };
+
+    const handleIncreaseQuantity = () => {
+        dispatch(increaseQuantity(element))
+    }
+
+    const handleDecreaseQuantity = () => {
+        dispatch(decreaseQuantity(element))
+    }
+
+    useEffect(() => {
+        dispatch(calculateTotal())
+    })
 
     return (
         <div className={styles.cartItem}>
@@ -32,7 +43,7 @@ const CartItem = ({ element }: CartItemProps) => {
                 <p>{element?.name}</p>
             </div>
             <p>${element?.price}</p>
-            <InputQuantity initialValue={element?.quantity as number} />
+            <InputQuantity handleDecreaseQuantity={handleDecreaseQuantity} handleIncreaseQuantity={handleIncreaseQuantity} initialValue={element?.quantity as number} />
             <p>${element?.price * element?.quantity}</p>
         </div>
     )
