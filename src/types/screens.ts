@@ -1,1 +1,4 @@
-export type CheckoutScreenType = "checkoutForm" | "cardDetails" | "shippingDetails";
+export type CheckoutScreenType =
+  | "checkoutForm"
+  | "cardDetails"
+  | "shippingDetails";

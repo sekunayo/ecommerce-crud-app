@@ -1,20 +1,36 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import BackCard from './BackCard';
-import FrontCard from './FrontCard';
-import { styles } from "./styles"
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { CheckoutScreenType } from "../../types/screens";
+import BackCard from "./BackCard";
+import FrontCard from "./FrontCard";
+import { styles } from "./styles";
 
-const CardDetails = () => {
-    const cardValues = useSelector((state: RootState) => state.checkout.card)
-    return (
-        <div className={styles.cardDetails}>
-            <FrontCard values={cardValues} />
-            <BackCard values={cardValues} />
-
-            <p className={styles.cardDetailsText}>Proceed to shipping</p>
-        </div>
-    )
+interface CheckoutFormProps {
+  handleCheckoutScreen?: (newScreen: CheckoutScreenType) => void;
 }
 
-export default CardDetails
+const CardDetails = ({ handleCheckoutScreen }: CheckoutFormProps) => {
+  const cardValues = useSelector((state: RootState) => state.checkout.card);
+
+  const handleProceedToShipping = () => {
+    handleCheckoutScreen?.("shippingDetails");
+  };
+
+  return (
+    <div className={styles.cardDetails}>
+      <FrontCard values={cardValues} />
+      <BackCard values={cardValues} />
+
+      <button
+        type="button"
+        onClick={handleProceedToShipping}
+        className={styles.cardDetailsText}
+      >
+        Proceed to shipping
+      </button>
+    </div>
+  );
+};
+
+export default CardDetails;

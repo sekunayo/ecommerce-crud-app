@@ -64,8 +64,19 @@ const selectDropdownLabel = css({
   textTransform: "uppercase",
 });
 
+const selectError = css({
+  color: "#FF0000",
+  fontSize: "8px",
+  fontStyle: "normal",
+  fontWeight: 500,
+  lineHeight: "normal",
+  letterSpacing: "2px",
+  fontFamily: "Space Grotesk",
+});
+
 export const styles = {
   selectDropdown,
   selectDropdownContainer,
   selectDropdownLabel,
+  selectError,
 };

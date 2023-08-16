@@ -1,20 +1,17 @@
-import { Formik, Form, useFormikContext } from "formik";
+import { Formik, Form } from "formik";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Button } from "../../components/Button";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../../components/Input";
 import { onlyNumberKey } from "../../helpers";
-import { checkoutValidationSchema } from "../../helpers/validationSchema";
+import { shippingValidationSchema } from "../../helpers/validationSchema";
 import { CheckoutScreenType } from "../../types/screens";
-import BackCard from "../CardDetails/BackCard";
-import FrontCard from "../CardDetails/FrontCard";
 import { styles } from "./styles";
-import { updateCardDetails } from "../../slices/checkoutSlice";
 import TextArea from "../../components/TextArea";
-import OrderViewTotal from "../OrderViewTotal";
-import useCountries from "../../hooks/useFetch";
 import useFetch from "../../hooks/useFetch";
 import SelectDropdown from "../../components/SelectDropdown";
+import { shippingFormInitialValues } from "../../helpers/initialValues";
+import { RootState } from "../../store";
+import OrderViewTotal from "../OrderViewTotal";
 
 interface ShippingFormProps {
   handleCheckoutScreen?: (newScreen: CheckoutScreenType) => void;
@@ -23,6 +20,8 @@ const ShippingForm = ({ handleCheckoutScreen }: ShippingFormProps) => {
   const dispatch = useDispatch();
   const [countries, setCountries] = useState([]);
   const { result, error } = useFetch("https://restcountries.com/v3.1/all");
+  const cartValue = useSelector((state: RootState) => state.cart.value);
+  const cartTotal = useSelector((state: RootState) => state.cart.total);
 
   useEffect(() => {
     const newArray = result.map((element: any) => element?.name?.common);
@@ -31,10 +30,10 @@ const ShippingForm = ({ handleCheckoutScreen }: ShippingFormProps) => {
 
   return (
     <Formik
-      initialValues={{ country: "", state: "" }}
-      validationSchema={checkoutValidationSchema}
+      initialValues={shippingFormInitialValues}
+      validationSchema={shippingValidationSchema}
       onSubmit={(values, action) => {
-        handleCheckoutScreen?.("cardDetails");
+        console.log(values);
         action.resetForm();
       }}
     >
@@ -72,6 +71,7 @@ const ShippingForm = ({ handleCheckoutScreen }: ShippingFormProps) => {
                 <Input label="Address 2" name="address2" type="text" />
                 <Input label="Town / City" name="city" type="text" />
                 <Input label="State" name="state" type="text" />
+                <Input label="Zip Code" name="zipCode" type="text" />
                 <Input
                   onKeyDown={onlyNumberKey}
                   maxLength={11}
